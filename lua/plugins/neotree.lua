@@ -1,3 +1,5 @@
+-- File explorer
+
 vim.keymap.set("n", "<leader>ex", ":Neotree toggle<CR>")
 vim.keymap.set("n", "<leader>gs", ":Neotree float git_status<CR>")
 

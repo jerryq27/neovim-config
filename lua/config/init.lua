@@ -1,3 +1,5 @@
+-- Config entrypoint
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 

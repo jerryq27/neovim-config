@@ -1,3 +1,5 @@
+-- Vim options
+
 local options = {
 	number = true,
 	expandtab = true,

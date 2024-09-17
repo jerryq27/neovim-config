@@ -1,3 +1,5 @@
+-- Editor footer statusbar 
+
 return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
