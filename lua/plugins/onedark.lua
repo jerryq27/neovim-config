@@ -3,7 +3,7 @@ return {
     name = "onedark",
     priority = 1000, 
     opts = {
-        style = "darker",
+        style = "cool",
         code_style = {
             comments = "italic",
         }

@@ -1,4 +1,5 @@
-vim.keymap.set("n", "<leader>ex", ":Neotree<CR>")
+vim.keymap.set("n", "<leader>ex", ":Neotree toggle<CR>")
+vim.keymap.set("n", "<leader>gs", ":Neotree float git_status<CR>")
 
 return {
     "nvim-neo-tree/neo-tree.nvim",
