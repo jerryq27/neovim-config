@@ -2,5 +2,10 @@ return {
     "navarasu/onedark.nvim",
     name = "onedark",
     priority = 1000, 
-    opts = {}
+    opts = {
+        style = "darker",
+        code_style = {
+            comments = "italic",
+        }
+    }
 }
