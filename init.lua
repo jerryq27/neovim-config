@@ -44,6 +44,7 @@ vim.g.maplocalleader = "\\"
 require("lazy").setup({
   spec = {
     -- add your plugins here
+    { "navarasu/onedark.nvim", name = "onedark", priority = 1000 }
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -51,3 +52,6 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
+
+require("onedark").setup()
+vim.cmd.colorscheme "onedark"
