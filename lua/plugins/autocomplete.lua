@@ -16,7 +16,7 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
-		config = function()
+		opts = function()
 			-- Set up nvim-cmp.
 			local cmp = require("cmp")
 
@@ -46,6 +46,8 @@ return {
 					{ name = "buffer" },
 				}),
 			})
+
+			return {}
 		end,
 	},
 }
