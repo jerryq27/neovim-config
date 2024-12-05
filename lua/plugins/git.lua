@@ -2,13 +2,13 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         opts = {},
-        keys = {
-            {
-                "<leader>gd",
-                "<CMD>Gitsigns diffthis<CR>",
-                desc = "Show diff of current file"
-            },
-        }
+        -- keys = {
+        --     {
+        --         "<leader>gd",
+        --         "<CMD>Gitsigns diffthis<CR>",
+        --         desc = "Show diff of current file"
+        --     },
+        -- }
     },
 	{
 		"akinsho/git-conflict.nvim",
