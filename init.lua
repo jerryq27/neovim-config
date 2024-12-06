@@ -91,7 +91,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -201,6 +201,26 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
     callback = function()
         vim.highlight.on_yank()
+    end,
+})
+
+-- Set colorscheme based on parent directory to determine the type of project.
+vim.api.nvim_create_autocmd("VimEnter", {
+    desc = "Sets colorscheme based on the type of project",
+    group = vim.api.nvim_create_augroup("jconfig-colorscheme", { clear = true }),
+    callback = function()
+        local current_dir = vim.fn.getcwd()
+        if string.match(current_dir, "WebDev") then
+            vim.cmd.colorscheme "tokyonight-night"
+        elseif string.match(current_dir, "LowLevelDev") then
+            vim.cmd.colorscheme "nord"
+        elseif string.match(current_dir, "MobileDev") then
+            vim.cmd.colorscheme "kanagawa-paper"
+        else
+            vim.cmd.colorscheme "vscode"
+        end
+
+        vim.cmd.hi "Comment gui=none"
     end,
 })
 
@@ -851,6 +871,9 @@ require("lazy").setup({
             vim.cmd.hi "Comment gui=none"
         end,
     },
+    { "Mofiqul/vscode.nvim" },
+    { "sho-87/kanagawa-paper.nvim" },
+    { "shaunsingh/nord.nvim" },
 
     -- Highlight todo, notes, etc in comments
     { "folke/todo-comments.nvim", event = "VimEnter", dependencies = { "nvim-lua/plenary.nvim" }, opts = { signs = false } },
