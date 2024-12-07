@@ -35,16 +35,21 @@ vim.api.nvim_create_autocmd("DirChanged", {
     desc = "Sets colorscheme when switching projects",
     group = vim.api.nvim_create_augroup("jconfig-dirchanged-colorscheme", { clear = true }),
     callback = function()
-        vim.cmd.colorscheme(determineColorScheme())
-        vim.cmd.hi "Comment gui=none"
+        vim.schedule(function()
+            vim.cmd.colorscheme(determineColorScheme())
+            vim.cmd.hi "Comment gui=none"
+        end)
     end,
 })
+
 --  Set colorscheme when opening Neovim.
 vim.api.nvim_create_autocmd("VimEnter", {
     desc = "Sets colorscheme when opening Neovim",
     group = vim.api.nvim_create_augroup("jconfig-vimenter-colorscheme", { clear = true }),
     callback = function()
-        vim.cmd.colorscheme(determineColorScheme())
-        vim.cmd.hi "Comment gui=none"
+        vim.schedule(function()
+            vim.cmd.colorscheme(determineColorScheme())
+            vim.cmd.hi "Comment gui=none"
+        end)
     end,
 })
