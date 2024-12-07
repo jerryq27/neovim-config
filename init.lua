@@ -205,21 +205,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Set colorscheme based on parent directory to determine the type of project.
-vim.api.nvim_create_autocmd("VimEnter", {
+vim.api.nvim_create_autocmd("DirChanged", {
     desc = "Sets colorscheme based on the type of project",
     group = vim.api.nvim_create_augroup("jconfig-colorscheme", { clear = true }),
     callback = function()
-        local current_dir = vim.fn.getcwd()
-        if string.match(current_dir, "WebDev") then
-            vim.cmd.colorscheme "tokyonight-night"
-        elseif string.match(current_dir, "LowLevelDev") then
-            vim.cmd.colorscheme "nord"
-        elseif string.match(current_dir, "MobileDev") then
-            vim.cmd.colorscheme "kanagawa-paper"
+        -- local current_dir = vim.fn.getcwd()
+        local workspace = require "workspaces"
+        local project = workspace.name()
+        local projectschemes = {
+            nvim = "vscode",
+            spacevibes = "tokyonight-night",
+            carprofiles = "kanagawa-paper",
+        }
+
+        if projectschemes[project] ~= nil then
+            vim.cmd.colorscheme(projectschemes[project])
         else
             vim.cmd.colorscheme "vscode"
         end
-
         vim.cmd.hi "Comment gui=none"
     end,
 })
@@ -424,6 +427,7 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
             vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
             vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+            vim.keymap.set("n", "<leader>sp", ":Telescope workspaces<CR>", { desc = "[S]earch [P]rojects" })
             vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
             vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
             vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
@@ -873,8 +877,6 @@ require("lazy").setup({
     },
     { "Mofiqul/vscode.nvim" },
     { "sho-87/kanagawa-paper.nvim" },
-    { "shaunsingh/nord.nvim" },
-
     -- Highlight todo, notes, etc in comments
     { "folke/todo-comments.nvim", event = "VimEnter", dependencies = { "nvim-lua/plenary.nvim" }, opts = { signs = false } },
 
@@ -940,7 +942,39 @@ require("lazy").setup({
         --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
         --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     },
-
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        version = "*",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+        },
+        cmd = "Neotree",
+        keys = {
+            { "\\", ":Neotree reveal<CR>", desc = "NeoTree reveal", silent = true },
+        },
+        opts = {
+            filesystem = {
+                window = {
+                    mappings = {
+                        ["\\"] = "close_window",
+                    },
+                },
+            },
+        },
+    },
+    {
+        "natecraddock/workspaces.nvim",
+        opts = {
+            cd_type = "global",
+            hooks = {
+                open = function()
+                    vim.cmd ":Neotree reveal"
+                end,
+            },
+        },
+    },
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
     -- init.lua. If you want these files, they are in the repository, so you can just download them and
     -- place them in the correct locations.
