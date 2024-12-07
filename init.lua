@@ -746,6 +746,7 @@ require("lazy").setup({
             vim.cmd.hi "Comment gui=none"
         end,
     },
+    { "navarasu/onedark.nvim" },
     { "Mofiqul/vscode.nvim" },
     { "sho-87/kanagawa-paper.nvim" },
     -- Highlight todo, notes, etc in comments

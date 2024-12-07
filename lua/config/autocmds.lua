@@ -5,7 +5,7 @@ local function determineColorScheme()
     local workspaces = require "workspaces"
     local project = workspaces.name()
     local colorschemes = {
-        nvim = "vscode",
+        nvim = "onedark",
         spacevibes = "tokyonight-night",
         carprofiles = "kanagawa-paper",
     }
