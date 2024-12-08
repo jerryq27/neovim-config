@@ -54,6 +54,11 @@ local options = {
 
     -- Minimal number of screen lines to keep above and below the cursor.
     scrolloff = 10,
+
+    -- Enable folding in editor.
+    foldmethod = "expr",
+    foldexpr = "nvim_treesitter#foldexpr()",
+    foldlevel = 20,
 }
 
 -- Sync clipboard between OS and Neovim.
