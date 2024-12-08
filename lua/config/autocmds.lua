@@ -53,3 +53,15 @@ vim.api.nvim_create_autocmd("VimEnter", {
         end)
     end,
 })
+
+-- Refresh Neotree on file save.
+vim.api.nvim_create_autocmd("FileWritePost", {
+    desc = "Refreshes Neotree when saving a file",
+    group = vim.api.nvim_create_augroup("jconfig-filewritepost-neotree", { clear = true }),
+    callback = function()
+        vim.schedule(function()
+            vim.cmd ":Neotree focus"
+            vim.api.nvim_feedkeys("<S-r><C-l>", "n", true)
+        end)
+    end,
+})
